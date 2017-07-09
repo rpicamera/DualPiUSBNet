@@ -22,25 +22,16 @@ _For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only 
 
 In this step, we are going to set the master pi as USB master and test the connection with the slave pi. Add the following line at the end of the file /etc/network/interfaces
 
----
-allow-hotplug usb0
 
-mapping hotplug
-
-        script grep
-        
+    allow-hotplug usb0
+    mapping hotplug
+        script grep           
         map usb0
-
-iface usb0 inet static
-
-       address 192.168.2.14
-       
-       netmask 255.255.255.0
-       
-       broadcast 192.168.2.255
-       
+        
+    iface usb0 inet static
+       address 192.168.2.14       
+       netmask 255.255.255.0      
+       broadcast 192.168.2.255      
        up iptables -I INPUT 1 -s 192.168.2.15 -j ACCEPT
-       
----
        
 Reboot the mater pi, connect slave pi to the master pi's USB 0. Login to the master pi, try to ping raspberrypi.local, if it shown the ip address begin with 169, then it means master pi was set up successfully. I haven't figure it out how to share the internet with the slave pi. So, if needed update, upgrade or install any software, you need to connect the slave pi to the PC or Mac with internet share on. 
