@@ -3,6 +3,20 @@ Dual raspberry pi system communicate via USB Ethernet.
 Master Raspberry Pi: any type of Raspberry Pi
 Slave Raspberry Pi: mode A only.
 
+##  Set up master rpi (any pi with build in wifi)
+1. Flash latest Raspbian lite (desktop could be fine, but it is not necessary.). Once Raspbian if flashed, open up the boot partition and add new file _ssh_ to enable the ssh on boot. 
+
+2: Set up the wireless. Still in the boot partition, add the file _wpa_supplicant.conf_ and add the following lines and    replace SSID and PASSWORD with the ones for your network:
+
+        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+        update_config=1
+        network={
+            ssid="SSID"
+            psk="PASSWORD"
+        }
+        
+3: Boot the system and setup the USBNet.
+  
 ##  Set slave rpi as usb gadget. 
 Follow the this instruction http://blog.gbaman.info/?p=791. In short, here is the steps copied from that instruction. 
 
